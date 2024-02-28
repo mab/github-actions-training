@@ -12,10 +12,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Output the name of the event that triggered the workflow
-      run: echo trigger
-    - name: Output the name of the branch that the repository is currently referencing
-      run: git branch --show-current
-    - name: List all files in the repository
-      run: ls -all
+      - run: |
+          echo "🎉 The job was triggered by event: ${{ github.event_name }}"
+          echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ."
+
+      - uses: actions/checkout@v3.3.0
+
+      - name: List files in the repository
+        run: |
+          echo "The repository ${{ github.repository }} contains the following files:"
+          tree
